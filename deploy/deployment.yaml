@@ -1,0 +1,35 @@
+# Deployment for packagemanage service
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: patch-tracking-server
+spec:
+  selector:
+    matchLabels:
+      app: patch-tracking
+  template:
+    metadata:
+      labels:
+        app: patch-tracking
+    spec:
+      containers:
+        - name: patch-tracking-server
+          image: opensourceway/patchtracking:v1.0
+          volumeMounts:
+            - mountPath: /etc/patch-tracking/settings.conf
+              name: patchtracking-config-volume
+              subPath: settings.conf
+          resources:
+            requests:
+              cpu: 2000m
+              memory: 2000Mi
+          command:
+            - /bin/sh
+            - -c
+            - |
+              /usr/bin/patch-tracking 
+      volumes:
+        - name: patchtracking-config-volume
+          configMap:
+            name: patch-tracking-config
