@@ -19,7 +19,7 @@ spec:
           volumeMounts:
             - mountPath: /etc/patch-tracking/settings.conf
               name: patchtracking-secrets-volume
-              subPath: settings.conf
+              subPath: settings
           resources:
             requests:
               cpu: 2000m
