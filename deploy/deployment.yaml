@@ -31,5 +31,5 @@ spec:
               /usr/bin/patch-tracking 
       volumes:
         - name: patchtracking-secrets-volume
-          configMap:
-            name: patch-tracking-secrets
+          secret:
+            secretName: patch-tracking-secrets
