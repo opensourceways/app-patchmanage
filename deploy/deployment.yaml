@@ -18,7 +18,7 @@ spec:
           image: opensourceway/patchtracking:v1.0
           volumeMounts:
             - mountPath: /etc/patch-tracking/settings.conf
-              name: patchtracking-config-volume
+              name: patchtracking-secrets-volume
               subPath: settings.conf
           resources:
             requests:
@@ -30,6 +30,6 @@ spec:
             - |
               /usr/bin/patch-tracking 
       volumes:
-        - name: patchtracking-config-volume
+        - name: patchtracking-secrets-volume
           configMap:
-            name: patch-tracking-config
+            name: patch-tracking-secrets
