@@ -20,6 +20,9 @@ spec:
             - mountPath: /etc/patch-tracking/settings.conf
               name: patchtracking-secrets-volume
               subPath: settings
+          volumeMounts:
+            - mountPath: /var/patch-tracking
+              name: patch-tracking-volume
           resources:
             requests:
               cpu: 2000m
@@ -33,3 +36,6 @@ spec:
         - name: patchtracking-secrets-volume
           secret:
             secretName: patch-tracking-secrets
+        - name: patch-tracking-volume
+          persistentVolumeClaim:
+            claimName: openeuler-patch-tracking-db-volume
