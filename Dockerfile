@@ -1,19 +1,13 @@
-FROM fedora:32 
+FROM swr.ap-southeast-1.myhuaweicloud.com/openeuler/openeuler-x86-20.09:20.09 
 
 MAINTAINER caozhi1214@gmail.com
 
-RUN dnf install gcc gcc-c++ vim python3-devel openssl-devel -y
-RUN pip3 install flask flask-sqlalchemy flask-apscheduler flask-httpauth requests pandas
-RUN pip3 install -I uwsgi
+ENV LANG="en_US.UTF-8"
+ENV LANGUAGE="en_US.UTF-8"
 
-WORKDIR /patchmanage
+RUN dnf -y install patch-tracking && dnf clean all 
 
-COPY patch-tracking*.rpm ./
-
-RUN dnf install patch-tracking*.rpm -y
+WORKDIR /etc/patch-tracking
 RUN openssl req -x509 -days 3650 -subj "/CN=self-signed" -nodes -newkey rsa:4096 -keyout self-signed.key -out self-signed.crt
-RUN \cp self-signed.* /etc/patch-tracking/
 
-RUN dnf clean all
-
-
+CMD ["/usr/bin/patch-tracking"]
