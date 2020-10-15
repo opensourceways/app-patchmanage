@@ -20,7 +20,6 @@ spec:
             - mountPath: /etc/patch-tracking/settings.conf
               name: patchtracking-secrets-volume
               subPath: settings
-          volumeMounts:
             - mountPath: /var/patch-tracking
               name: patch-tracking-volume
           resources:
