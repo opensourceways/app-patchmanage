@@ -3,6 +3,7 @@ resources:
   - namespace.yaml
   - deployment.yaml
   - service.yaml
+  - pvc.yaml
 commonLabels:
   app: openeuler-patchtracking
 namespace: patch-tracking
